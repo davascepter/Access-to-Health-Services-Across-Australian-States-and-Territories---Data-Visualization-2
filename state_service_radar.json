@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Health Service Profile by State",
+
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+
+  "transform": [
+    {
+      "calculate":
+        "datum.Section == 'Hospitals' ? 0 : datum.Section == 'Pharmacies' ? 2.0944 : 4.1888",
+      "as": "angle"
+    },
+    {
+      "calculate": "cos(datum.angle) * datum.services_per_100k",
+      "as": "x"
+    },
+    {
+      "calculate": "sin(datum.angle) * datum.services_per_100k",
+      "as": "y"
+    }
+  ],
+
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+
+  "encoding": {
+    "x": {
+      "field": "x",
+      "type": "quantitative",
+      "axis": null
+    },
+
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "axis": null
+    },
+
+    "detail": {
+      "field": "STATE"
+    },
+
+    "color": {
+      "field": "STATE",
+      "type": "nominal"
+    },
+
+    "tooltip": [
+      {"field": "STATE_NAME"},
+      {"field": "Section"},
+      {"field": "services_per_100k"}
+    ]
+  },
+
+  "width": 1000,
+  "height": 500
+}

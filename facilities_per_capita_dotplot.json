@@ -1,0 +1,24 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Health services per 100,000 residents",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "services_per_100k",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "STATE",
+      "type": "nominal"
+    },
+    "color": {
+      "field": "Section",
+      "type": "nominal"
+    }
+  },
+  "width": 425,
+  "height": 600
+}

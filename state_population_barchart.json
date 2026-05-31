@@ -1,0 +1,48 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Resident population by Australian state and territory, June 2025.",
+  "data": {
+    "url": "state_population_2025.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Region != 'Norfolk Island' && datum.Region != 'Territory of Christmas Island' && datum.Region != 'Territory of Cocos (Keeling) Islands' && datum.Region != 'Jervis Bay Territory'"
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Region",
+      "type": "nominal",
+      "sort": "-y",
+      "title": "State or territory"
+    },
+    "y": {
+      "field": "Resident Population",
+      "type": "quantitative",
+      "title": "Resident population (June 2025)"
+    },
+    "tooltip": [
+      {
+        "field": "Region",
+        "type": "nominal",
+        "title": "State/territory"
+      },
+      {
+        "field": "Resident Population",
+        "type": "quantitative",
+        "title": "Population",
+        "format": ","
+      }
+    ],
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "legend": null
+    }
+  },
+  "title": "Resident population by Australian state and territory (June 2025)",
+
+  "width": 425,
+  "height": 500
+}

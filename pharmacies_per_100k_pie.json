@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Pharmacies per 100,000 people by Australian state and territory (shown as a pie).",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Section === 'Pharmacies'"
+    }
+  ],
+  "mark": "arc",
+  "encoding": {
+    "theta": {
+      "field": "services_per_100k",
+      "type": "quantitative",
+      "title": "Pharmacies per 100,000 people"
+    },
+    "color": {
+      "field": "STATE",
+      "type": "nominal",
+      "title": "State or territory"
+    },
+    "tooltip": [
+      {
+        "field": "STATE",
+        "type": "nominal",
+        "title": "State/territory"
+      },
+      {
+        "field": "amount",
+        "type": "quantitative",
+        "title": "Pharmacies (count)",
+        "format": ","
+      },
+      {
+        "field": "services_per_100k",
+        "type": "quantitative",
+        "title": "Pharmacies per 100k",
+        "format": ".2f"
+      }
+    ]
+  },
+  "title": "Pharmacies per 100,000 people by state (pie chart)"
+}

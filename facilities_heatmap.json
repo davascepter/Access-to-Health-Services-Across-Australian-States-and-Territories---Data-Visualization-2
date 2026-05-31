@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Health facility density by state and service type",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "Section",
+      "type": "nominal"
+    },
+    "y": {
+      "field": "STATE",
+      "type": "nominal"
+    },
+    "color": {
+      "field": "services_per_100k",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "blues"
+      }
+    },
+    "tooltip": [
+      {"field":"STATE"},
+      {"field":"Section"},
+      {"field":"services_per_100k"}
+    ]
+  },
+  "width": 300,
+  "height": 500
+}

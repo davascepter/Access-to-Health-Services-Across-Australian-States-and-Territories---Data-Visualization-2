@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Number of hospitals, pharmacies, and community services by state.",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "STATE",
+      "type": "nominal",
+      "title": "State or territory"
+    },
+    "xOffset": {
+      "field": "Section"
+    },
+    "y": {
+      "field": "amount",
+      "type": "quantitative",
+      "title": "Number of facilities"
+    },
+    "color": {
+      "field": "Section",
+      "type": "nominal",
+      "title": "Facility type"
+    },
+    "tooltip": [
+      {
+        "field": "STATE",
+        "type": "nominal",
+        "title": "State/territory"
+      },
+      {
+        "field": "Section",
+        "type": "nominal",
+        "title": "Facility type"
+      },
+      {
+        "field": "amount",
+        "type": "quantitative",
+        "title": "Number of facilities",
+        "format": ","
+      }
+    ]
+  },
+  "title": "Health facilities by type and state",
+  "width": 500,
+  "height": 500
+}

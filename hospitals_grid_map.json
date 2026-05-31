@@ -1,0 +1,112 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Hospitals per 100,000 Residents",
+    "subtitle": "Population-adjusted hospital availability across Australian states and territories"
+  },
+
+  "width": 1000,
+  "height": 650,
+
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.Section == 'Hospitals'"
+    },
+
+    {
+      "calculate":
+      "datum.STATE == 'WA' ? 1 : datum.STATE == 'NT' ? 2 : datum.STATE == 'SA' ? 2 : datum.STATE == 'QLD' ? 3 : datum.STATE == 'NSW' ? 3 : datum.STATE == 'VIC' ? 3 : datum.STATE == 'ACT' ? 4 : 3",
+      "as": "col"
+    },
+
+    {
+      "calculate":
+      "datum.STATE == 'NT' ? 1 : datum.STATE == 'QLD' ? 1 : datum.STATE == 'WA' ? 2 : datum.STATE == 'SA' ? 2 : datum.STATE == 'NSW' ? 2 : datum.STATE == 'VIC' ? 3 : datum.STATE == 'ACT' ? 3 : 4",
+      "as": "row"
+    }
+  ],
+
+  "layer": [
+
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 8,
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+
+      "encoding": {
+
+        "x": {
+          "field": "col",
+          "type": "ordinal",
+          "axis": null
+        },
+
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "axis": null
+        },
+
+        "color": {
+          "field": "services_per_100k",
+          "type": "quantitative",
+          "title": "Hospitals per 100k",
+          "scale": {
+            "scheme": "teals"
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "STATE_NAME",
+            "title": "State"
+          },
+          {
+            "field": "services_per_100k",
+            "title": "Hospitals per 100k"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+
+      "encoding": {
+
+        "x": {
+          "field": "col",
+          "type": "ordinal"
+        },
+
+        "y": {
+          "field": "row",
+          "type": "ordinal"
+        },
+
+        "text": {
+          "field": "STATE"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Pharmacies per 100,000 people by state",
+  "width": 1000,
+  "height": 400,
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 550,
+    "translate": [300, 220]
+  },
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Section === 'Pharmacies'"
+    },
+    {
+      "lookup": "STATE_NAME",
+      "from": {
+        "data": {
+          "url": "australian_states.json",
+          "format": {
+            "type": "json",
+            "property": "features"
+          }
+        },
+        "key": "properties.STATE_NAME"
+      },
+      "as": "geo"
+    }
+  ],
+  "mark": {
+    "type": "geoshape"
+  },
+  "encoding": {
+    "shape": {
+      "field": "geo",
+      "type": "geojson"
+    },
+    "color": {
+      "field": "services_per_100k",
+      "type": "quantitative",
+      "title": "Pharmacies per 100k",
+      "scale": {
+        "scheme": "greens"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "STATE_NAME",
+        "type": "nominal",
+        "title": "State/territory"
+      },
+      {
+        "field": "amount",
+        "type": "quantitative",
+        "title": "Pharmacies (count)",
+        "format": ","
+      },
+      {
+        "field": "services_per_100k",
+        "type": "quantitative",
+        "title": "Pharmacies per 100k",
+        "format": ".2f"
+      }
+    ]
+  }
+}

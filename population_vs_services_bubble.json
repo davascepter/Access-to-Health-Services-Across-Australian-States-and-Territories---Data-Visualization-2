@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Population vs Number of Health Facilities",
+
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "amount",
+          "as": "total_facilities"
+        }
+      ],
+      "groupby": [
+        "STATE",
+        "STATE_NAME",
+        "Population"
+      ]
+    }
+  ],
+
+  "mark": {
+    "type": "circle",
+    "opacity": 0.8
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Population",
+      "type": "quantitative"
+    },
+
+    "y": {
+      "field": "total_facilities",
+      "type": "quantitative"
+    },
+
+    "size": {
+      "field": "total_facilities",
+      "type": "quantitative"
+    },
+
+    "color": {
+      "field": "STATE",
+      "type": "nominal"
+    },
+
+    "tooltip": [
+      {"field":"STATE_NAME"},
+      {"field":"Population"},
+      {"field":"total_facilities"}
+    ]
+  },
+  "width": 1000,
+  "height": 500
+}

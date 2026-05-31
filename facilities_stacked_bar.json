@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Composition of health facilities by state",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "STATE",
+      "type": "nominal"
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "amount",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Section",
+      "type": "nominal"
+    }
+  },
+  "width": 400,
+  "height": 500
+}

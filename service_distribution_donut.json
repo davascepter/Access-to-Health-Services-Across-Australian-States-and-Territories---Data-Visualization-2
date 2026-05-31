@@ -1,0 +1,24 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Distribution of facility types",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "mark": {
+    "type": "arc",
+    "innerRadius": 60
+  },
+  "encoding": {
+    "theta": {
+      "aggregate": "sum",
+      "field": "amount",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Section",
+      "type": "nominal"
+    }
+  },
+  "width": 1000,
+  "height": 500
+}

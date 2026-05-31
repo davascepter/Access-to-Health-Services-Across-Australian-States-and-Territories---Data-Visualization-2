@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Access to Health Services Across Australian States and Territories</title>
+
+  <!-- Vega Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; line-height: 1.7; }
+header { background: rgb(235, 186, 126); border-bottom: 4px solid #f5e1a9; padding: 4rem 8vw; }
+header h1 { margin: 0; font-size: clamp(4rem, 5vw, 4rem); font-weight: 800; color: #0f172a; }
+header p { margin-top: 1rem; max-width: 900px; color: #475569; font-size: 1.05rem; }
+main { max-width: 1400px; margin: auto; padding: 2rem; }
+.chapter-title { font-size:3rem; font-weight: 700; margin: 4rem 0 2rem; border-left: 6px solid #2563eb;
+padding-left: 1rem; color: #0f172a; }
+.grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+.section { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 16px
+rgba(0,0,0,0.08); }
+.section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; color: #64748b;
+margin-bottom: 0.5rem; }
+.section h2 { margin-top: 0; color: #0f172a; }
+.section p { color: #475569; }
+.insight { background: #eff6ff; border-left: 5px solid #2563eb; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; }
+.chart-container { margin-top: 1rem; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem;
+background: white; }
+.chart { min-height: 350px; }
+footer { margin-top: 4rem; background: rgb(235,186,126); border-top: 1px solid #cbd5e1; padding: 2rem; text-align:
+center; color: #64748b; }
+@media (max-width: 900px) { .grid-two { grid-template-columns: 1fr; } }
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Access to Health Services Across Australian States and Territories</h1>
+
+  <p>
+    Healthcare access varies significantly across Australia due to differences in
+    population size, geography and infrastructure. This visualisation explores how
+    hospitals, pharmacies and community services are distributed across states and
+    territories using both raw counts and population-adjusted measures.
+  </p>
+</header>
+
+<main>
+
+  <main>
+
+  <!-- Executive Summary -->
+
+  <section class="section">
+
+```
+<h2>Executive Summary</h2>
+
+<p>
+  Healthcare infrastructure across Australia broadly follows population size,
+  however population-adjusted measures reveal important differences in service
+  accessibility. While larger states contain more healthcare facilities overall,
+  smaller states and territories can provide higher levels of service per resident.
+  This report explores these patterns through a series of visualisations comparing
+  population, healthcare infrastructure, service composition and accessibility.
+</p>
+```
+
+  </section>
+
+  <!-- CHAPTER 1 -->
+
+<!-- ====================================================== -->
+<!-- CHAPTER 1 -->
+<!-- ====================================================== -->
+
+<h2 class="chapter-title">
+1. Where Do Australians Live?
+</h2>
+
+<p style="margin-top:-10px;margin-bottom:25px;color:#64748b;">
+Understanding population distribution provides important context for healthcare
+demand across Australia. Larger populations typically require more healthcare
+services and infrastructure, although facility availability does not always
+increase proportionally with population size.
+</p>
+
+<div class="grid-two">
+
+  <!-- Population -->
+
+  <section class="section">
+
+    <div class="section-label">Population</div>
+
+    <h2>Population by State and Territory</h2>
+
+    <p>
+      Australia's population is concentrated within a small number of states,
+      creating different levels of demand for healthcare infrastructure and
+      services across the country.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      New South Wales, Victoria and Queensland account for the majority of
+      Australia's population, creating substantially greater healthcare demand
+      than smaller states and territories.
+    </div>
+
+    <div class="chart-container">
+      <div id="state-population-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+  <!-- Total Facilities -->
+
+  <section class="section">
+
+    <div class="section-label">Infrastructure</div>
+
+    <h2>Total Health Facilities by State</h2>
+
+    <p>
+      This chart compares the total number of healthcare facilities available in
+      each state and territory, providing an overview of healthcare infrastructure
+      distribution nationwide.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      States with larger populations generally contain more healthcare facilities,
+      suggesting that infrastructure is concentrated where demand is highest.
+    </div>
+
+    <div class="chart-container">
+      <div id="total-facilities-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- Bubble Chart -->
+
+<section class="section">
+
+  <div class="section-label">Relationship</div>
+
+  <h2>Population Versus Healthcare Infrastructure</h2>
+
+  <p>
+    Comparing population size against healthcare facility counts helps identify
+    whether infrastructure grows proportionally with demand. Bubble size provides
+    an additional indication of healthcare capacity.
+  </p>
+
+  <div class="insight">
+    <strong>Key Insight:</strong>
+    A strong positive relationship exists between population size and healthcare
+    infrastructure, although some states appear to provide relatively more
+    facilities than would be expected based solely on population.
+  </div>
+
+  <div class="chart-container">
+    <div id="bubble-chart" class="chart-large"></div>
+  </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- CHAPTER 2 -->
+<!-- ====================================================== -->
+
+<h2 class="chapter-title">
+2. What Healthcare Services Are Available?
+</h2>
+
+<p style="margin-top:-10px;margin-bottom:25px;color:#64748b;">
+Healthcare systems rely on a mixture of hospitals, pharmacies and community
+services. The following visualisations examine how these facility types are
+distributed throughout Australia and how service composition varies between
+states and territories.
+</p>
+
+<div class="grid-two">
+
+  <!-- Facility Types -->
+
+  <section class="section">
+
+    <div class="section-label">Service Mix</div>
+
+    <h2>Health Facility Types by State</h2>
+
+    <p>
+      Different states rely on varying combinations of hospitals, pharmacies and
+      community services. This chart highlights how healthcare service provision
+      differs across Australia.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      The composition of healthcare facilities differs across states, indicating
+      that healthcare delivery relies on varying combinations of hospitals,
+      pharmacies and community services.
+    </div>
+
+    <div class="chart-container">
+      <div id="facilities-by-type-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+  <!-- Stacked Bar -->
+
+  <section class="section">
+
+    <div class="section-label">Composition</div>
+
+    <h2>Facility Composition by State</h2>
+
+    <p>
+      This stacked comparison provides a consolidated view of healthcare
+      infrastructure, making it easier to compare the balance of facility types
+      between states and territories.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      While pharmacies often form the largest component of healthcare
+      infrastructure, the balance between service types varies noticeably
+      between states and territories.
+    </div>
+
+    <div class="chart-container">
+      <div id="stacked-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- Donut -->
+
+<section class="section">
+
+  <div class="section-label">Distribution</div>
+
+  <h2>National Distribution of Facility Types</h2>
+
+  <p>
+    This chart summarises Australia's healthcare network by showing the overall
+    contribution of each facility category to the national healthcare system.
+  </p>
+
+  <div class="insight">
+    <strong>Key Insight:</strong>
+    Community-based services and pharmacies collectively make up a substantial
+    proportion of Australia's healthcare network, highlighting the importance of
+    primary healthcare accessibility.
+  </div>
+
+  <div class="chart-container">
+    <div id="donut-chart" class="chart"></div>
+  </div>
+
+</section>
+
+  <!-- CHAPTER 3 -->
+
+  <h2 class="chapter-title">
+3. Which States Have Better Access?
+</h2>
+
+<p style="margin-top:-10px;margin-bottom:25px;color:#64748b;">
+While larger states naturally contain more healthcare facilities, accessibility is
+better assessed using population-adjusted measures. The visualisations below compare
+healthcare availability across Australia using per-capita indicators and geographic
+representations.
+</p>
+
+<!-- PHARMACY MAP -->
+
+<section class="section">
+
+  <div class="section-label">Geography</div>
+
+  <h2>Pharmacies per 100,000 Residents Across Australia</h2>
+
+  <p>
+    This choropleth map visualises pharmacy availability relative to population size.
+    Darker states indicate a higher number of pharmacies per 100,000 residents,
+    helping reveal geographic differences in access to essential healthcare services
+    and medications.
+  </p>
+
+  <div class="insight">
+    <strong>Key Insight:</strong>
+    Population-adjusted measures reveal accessibility differences that may not be
+    visible when examining raw facility counts alone.
+  </div>
+
+  <div class="chart-container">
+    <div id="map-pharmacies-chart" class="chart-large"></div>
+  </div>
+
+</section>
+
+<!-- GRID MAP -->
+
+<section class="section">
+
+  <div class="section-label">Accessibility</div>
+
+  <h2>Hospitals per 100,000 Residents by State</h2>
+
+  <p>
+    The grid map simplifies Australia's geography into equally sized tiles,
+    allowing hospital availability to be compared directly between states and
+    territories. Colour intensity represents the number of hospitals per
+    100,000 residents.
+  </p>
+
+  <div class="insight">
+    <strong>Key Insight:</strong>
+    Some smaller states and territories achieve higher hospital availability per
+    resident despite having fewer hospitals overall.
+  </div>
+
+  <div class="chart-container">
+    <div id="gridmap-chart" class="chart"></div>
+  </div>
+
+</section>
+
+<!-- HEATMAP + DOTPLOT -->
+
+<div class="grid-two">
+
+  <section class="section">
+
+    <div class="section-label">Density</div>
+
+    <h2>Health Service Density Heatmap</h2>
+
+    <p>
+      This heatmap compares the density of hospitals, pharmacies and community
+      services across states and territories. Colour intensity highlights where
+      healthcare services are relatively more abundant on a per-capita basis.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      Different facility types exhibit different accessibility patterns across
+      Australia.
+    </div>
+
+    <div class="chart-container">
+      <div id="heatmap-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-label">Accessibility</div>
+
+    <h2>Healthcare Services per 100,000 Residents</h2>
+
+    <p>
+      This dot plot ranks states according to the number of healthcare services
+      available per 100,000 residents. By adjusting for population size, the chart
+      provides a fair comparison of healthcare accessibility.
+    </p>
+
+    <div class="insight">
+      <strong>Key Insight:</strong>
+      States with fewer total facilities may still provide strong accessibility
+      when measured on a per-capita basis.
+    </div>
+
+    <div class="chart-container">
+      <div id="dotplot-chart" class="chart"></div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- RADAR -->
+
+<section class="section">
+
+  <div class="section-label">Comparison</div>
+
+  <h2>Healthcare Service Profiles by State</h2>
+
+  <p>
+    The radar chart compares hospitals, pharmacies and community services
+    simultaneously, providing a multi-dimensional view of healthcare infrastructure
+    across Australian states and territories.
+  </p>
+
+  <div class="insight">
+    <strong>Key Insight:</strong>
+    Each state exhibits a distinct healthcare profile, reflecting different
+    approaches to healthcare service provision.
+  </div>
+
+  <div class="chart-container">
+    <div id="radar-chart" class="chart-large"></div>
+  </div>
+
+</section>
+
+  <!-- CONCLUSION -->
+
+  <section class="section">
+
+```
+<h2>Key Findings</h2>
+
+<ul>
+  <li>
+    Population size strongly influences the number of healthcare facilities available.
+  </li>
+
+  <li>
+    Pharmacies represent one of the largest categories of healthcare infrastructure nationwide.
+  </li>
+
+  <li>
+    Population-adjusted measures reveal meaningful differences in healthcare accessibility.
+  </li>
+
+  <li>
+    Smaller states and territories can achieve higher service density than larger states.
+  </li>
+
+  <li>
+    Healthcare accessibility depends on both infrastructure quantity and geographic distribution.
+  </li>
+</ul>
+```
+
+  </section>
+
+</main>
+
+
+</main>
+
+<footer>
+  <p>
+    FIT2179 Data Visualisation 2 – Monash University<br>
+    Data Sources: Australian Bureau of Statistics (ABS) and Australian Health Service Data.<br>
+    Visualisations created using Vega-Lite.<br>
+    Digdaya Dava Putra - 29/05/2026
+  </p>
+</footer>
+
+<script>
+
+vegaEmbed('#state-population-chart', 'state_population_barchart.json');
+
+vegaEmbed('#total-facilities-chart', 'total_facilities_per_state.json');
+
+vegaEmbed('#facilities-by-type-chart', 'facilities_by_type_per_state.json');
+
+vegaEmbed('#map-pharmacies-chart', 'map_pharmacies_per_100k.json');
+
+vegaEmbed('#bubble-chart', 'population_vs_services_bubble.json');
+
+vegaEmbed('#donut-chart', 'service_distribution_donut.json');
+
+vegaEmbed('#stacked-chart', 'facilities_stacked_bar.json');
+
+vegaEmbed('#heatmap-chart', 'facilities_heatmap.json');
+
+vegaEmbed('#dotplot-chart', 'facilities_per_capita_dotplot.json');
+
+vegaEmbed('#radar-chart', 'state_service_radar.json');
+
+vegaEmbed('#gridmap-chart', 'hospitals_grid_map.json');
+
+</script>
+
+</body>
+</html>

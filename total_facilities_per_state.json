@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Total number of health facilities (hospitals, pharmacies, community services) by state.",
+  "data": {
+    "url": "health_services_normalized.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "amount",
+          "as": "total_facilities"
+        }
+      ],
+      "groupby": ["STATE"]
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "STATE",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "State or territory"
+    },
+    "x": {
+      "field": "total_facilities",
+      "type": "quantitative",
+      "title": "Total health facilities"
+    },
+    "tooltip": [
+      {
+        "field": "STATE",
+        "type": "nominal",
+        "title": "State/territory"
+      },
+      {
+        "field": "total_facilities",
+        "type": "quantitative",
+        "title": "Total facilities",
+        "format": ","
+      }
+    ],
+    "color": {
+      "field": "STATE",
+      "type": "nominal",
+      "legend": null
+    }
+  },
+  "title": "Total health facilities by state (horizontal)",
+  "width": 425,
+  "height": 600
+}

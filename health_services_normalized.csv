@@ -1,0 +1,25 @@
+Section,STATE,STATE_NAME,amount,Population,services_per_100k
+Community Service,ACT,Australian Capital Territory,2,484792,0.41
+Community Service,NSW,New South Wales,8,8593871,0.09
+Community Service,NT,Northern Territory,1,264411,0.38
+Community Service,QLD,Queensland,10,5669834,0.18
+Community Service,SA,South Australia,6,1902331,0.32
+Community Service,TAS,Tasmania,0,575960,0.0
+Community Service,VIC,Victoria,17,7074468,0.24
+Community Service,WA,Western Australia,12,3043731,0.39
+Hospitals,ACT,Australian Capital Territory,12,484792,2.48
+Hospitals,NSW,New South Wales,308,8593871,3.58
+Hospitals,NT,Northern Territory,11,264411,4.16
+Hospitals,QLD,Queensland,219,5669834,3.86
+Hospitals,SA,South Australia,87,1902331,4.57
+Hospitals,TAS,Tasmania,31,575960,5.38
+Hospitals,VIC,Victoria,204,7074468,2.88
+Hospitals,WA,Western Australia,101,3043731,3.32
+Pharmacies,ACT,Australian Capital Territory,75,484792,15.47
+Pharmacies,NSW,New South Wales,1811,8593871,21.07
+Pharmacies,NT,Northern Territory,42,264411,15.88
+Pharmacies,QLD,Queensland,1137,5669834,20.05
+Pharmacies,SA,South Australia,417,1902331,21.92
+Pharmacies,TAS,Tasmania,150,575960,26.04
+Pharmacies,VIC,Victoria,1277,7074468,18.05
+Pharmacies,WA,Western Australia,617,3043731,20.27
